@@ -6,20 +6,6 @@ from secret import OPENAI_API_KEY # You will need to instantiate your own secret
 #def get_sol(query):
 #  pass
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 # from langchain.chains import RetrievalQA
 # from langchain.document_loaders import TextLoader
 # from langchain.embeddings.openai import OpenAIEmbeddings
@@ -59,22 +45,55 @@ from langchain.embeddings.openai import OpenAIEmbeddings
 from langchain.vectorstores import FAISS
 from langchain.llms import OpenAI
 from langchain.chains import RetrievalQA
+from langchain.text_splitter import RecursiveCharacterTextSplitter
+
 
 def initialize_qa_system():
     # Load documents from the provided PDF
     loader = PDFMinerLoader("source_docs/nature-based-solutions.pdf")
 
     pages = loader.load()
-
-    time.sleep(20)  # Introducing a 20 seconds timeout
+    #time.sleep(20)  # Introducing a 20 seconds timeout
 
     embeddings = OpenAIEmbeddings(openai_api_key=OPENAI_API_KEY)
-    time.sleep(20)  # Introducing a 20 seconds timeout
+    #time.sleep(20)  # Introducing a 20 seconds timeout
+
+    text_splitter = RecursiveCharacterTextSplitter(
+    # Set a really small chunk size, just to show.
+    chunk_size = 1000,
+    chunk_overlap  = 20,
+    length_function = len,
+    add_start_index = True,
+    )
+
+    texts = text_splitter.split_text(str(pages))
+
+    x=0
+    arr=[]
+
+    while x < len(texts)-1:
+        if x+31>len(texts)-1:
+            short_texts = texts[x:(len(texts)-1)]
+            result = embeddings.embed_documents([short_texts])
+            arr.append(result)
+            x=x+32
+            time.sleep(20) 
+        else:
+            short_texts = texts[x:x+31]
+            result = embeddings.embed_documents([short_texts])
+            arr.append(result)
+            x=x+32
+            time.sleep(20) 
+
+    #result = embeddings.embed_documents([pages])
+
+    faiss_index = FAISS.from_embeddings(arr,embeddings)
     
-    faiss_index = FAISS.from_documents(pages, embeddings)
+    #faiss_index = FAISS.from_documents(pages, embeddings)
+    #time.sleep(20)  # Introducing a 20 seconds timeout
     
     llm = OpenAI(openai_api_key=OPENAI_API_KEY)
-    time.sleep(20)  # Introducing a 20 seconds timeout
+    #time.sleep(20)  # Introducing a 20 seconds timeout
 
     # Initialize the QA system with the loaded documents
     qa = RetrievalQA.from_chain_type(llm=llm, chain_type="stuff", retriever=faiss_index.as_retriever())
