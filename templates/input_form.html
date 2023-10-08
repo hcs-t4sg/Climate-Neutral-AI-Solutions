@@ -1,13 +1,47 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Question Submission</title>
+    <title>Climate Neutral AI</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            background-color: #f7f7f7;
+        }
+        .chat-container {
+            max-width: 500px;
+            margin: 50px auto;
+            border: 1px solid #ccc;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        textarea {
+            width: 80%;
+            padding: 10px;
+            margin-bottom: 20px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+        .submit-button {
+            padding: 10px 15px;
+            background-color: #007BFF;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+    </style>
 </head>
 <body>
-    <form action="/get_solution" method="post">
-        Enter your question: <br>
-        <textarea name="question" rows="4" cols="50"></textarea><br>
-        <input type="submit" value="Submit">
-    </form>
+    <div class="chat-container">
+        <h2>Climate Neutral AI</h2>
+        <h3>Ask a Question</h3>
+        <form action="/get_solution" method="post">
+            <textarea name="question" rows="4" placeholder="Enter your question here..."></textarea><br>
+            <input class="submit-button" type="submit" value="Ask">
+        </form>
+    </div>
 </body>
 </html>
