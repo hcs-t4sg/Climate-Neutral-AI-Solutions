@@ -1,10 +1,10 @@
 from langchain.chains import RetrievalQA
-from langchain.document_loaders import TextLoader, PyPDFLoader
+from langchain.document_loaders import PyPDFDirectoryLoader
 from langchain.embeddings.openai import OpenAIEmbeddings
 from langchain.llms import OpenAI
 from langchain.text_splitter import RecursiveCharacterTextSplitter
 from langchain.vectorstores import Chroma
-from langchain import PromptTemplate
+from langchain.prompts import PromptTemplate
 import os
 
 # Eventually will become our function that will get the climate-netural solution using LangChain
@@ -15,16 +15,16 @@ def get_sol(query_params):
 
   llm = OpenAI(openai_api_key=os.environ["OPENAI_API_KEY"])
 
-  loader = PyPDFLoader("source_docs/Meta-2023-Path-to-Net-Zero.pdf")
-
   text_splitter = RecursiveCharacterTextSplitter(
     chunk_size = 1000,
     chunk_overlap  = 20,
     length_function = len,
     is_separator_regex = False,
-  )
+  )  
 
-  pages = loader.load_and_split(text_splitter=text_splitter)
+  loader = PyPDFDirectoryLoader("source_docs/")
+  pages = loader.load()
+
   texts = text_splitter.split_documents(pages)
 
   embeddings = OpenAIEmbeddings()
@@ -35,7 +35,7 @@ def get_sol(query_params):
   template = """
   We are a {company_type} company looking to cut our emissions through targeting our {target}.
   
-  Give me three actionable, realistic to-dos.
+  Give me three actionable, very specific to-dos, on three separate lines.
   """
 
   prompt = PromptTemplate(

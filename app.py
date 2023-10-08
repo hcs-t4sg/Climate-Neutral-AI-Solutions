@@ -9,7 +9,7 @@ os.environ["OPENAI_API_KEY"] = OPENAI_API_KEY
 
 @app.route('/')
 def index():
-    query = {"company_type": "grocery", "target": "supply chain"}
+    query = {"company_type": "technology", "target": "materials"}
     answer = get_sol(query)
     return f'{answer}'
 
