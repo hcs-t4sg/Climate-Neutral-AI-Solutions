@@ -1,20 +1,19 @@
-from flask import Flask, render_template, request
-from helpers import get_sol
+from flask import Flask, request, render_template
 
 app = Flask(__name__)
 
 
-@app.route('/')
+@app.route('/', methods=['GET', 'POST'])
 def index():
-    return render_template("index.html")
-
-@app.route('/proposal', methods=["POST"])
-def proposal():
-    prompt = request.form["prompt"]
-    # proposal = get_sol(prompt)
-    proposal = get_sol(prompt)
-    return render_template("proposal.html", proposal=proposal)
-
+    if request.method == 'POST':
+        # process form data here
+        form_data = request.form
+        message = "Form received. Here are the details: <br>"
+        for key, value in form_data.items():
+            if value and value != '\n':
+                message += f"{key}: {value} <br>"
+        return message
+    return render_template('index.html')
 
 if __name__ == "__main__":
     app.run(debug=True)
