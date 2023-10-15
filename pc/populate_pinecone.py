@@ -12,7 +12,7 @@ os.environ["OPENAI_API_KEY"] = OPENAI_API_KEY
                                   
 
 def populate_pinecone():
-  loader = DirectoryLoader('sources/', glob="*.pdf", loader_cls=PyPDFLoader)
+  loader = DirectoryLoader('../sources/', glob="*.pdf", loader_cls=PyPDFLoader)
   docs = loader.load()
   text_splitter = RecursiveCharacterTextSplitter(chunk_size=1000, chunk_overlap=50)
   texts = text_splitter.split_documents(docs)
