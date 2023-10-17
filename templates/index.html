@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <title>Company Information</title>
+    <!-- Add Material-UI stylesheets and scripts here -->
+</head>
+<body>
+    <form id="dataForm" action="/" method="POST">
+        <label for="reductionInterest">Reduction Interest or Question (Freeform Text):</label>
+        <textarea id="reductionInterest" name="reductionInterest"></textarea>
+
+        <label for="revenue">Revenue (Positive Integer):</label>
+        <input type="number" id="revenue" name="revenue" min="0" required>
+
+        <label for="employeeCount">Employee Count (Positive Integer):</label>
+        <input type="number" id="employeeCount" name="employeeCount" min="0" required>
+
+        <label>Facilities:</label>
+        <div id="facilities">
+            <label for="facilityName">Facility Name:</label>
+            <input type="text" id="facilityName" name="facilityName" required>
+
+            <label for="controlled">Controlled:</label>
+            <select id="controlled" name="controlled" required>
+                <option value="">Select...</option>
+                <option value="yes">Yes</option>
+                <option value="no">No</option>
+            </select>
+
+            <label for="countryRegion">Country/Region:</label>
+            <input type="text" id="countryRegion" name="countryRegion" required>
+
+            <label for="productService">Product/Service:</label>
+            <input type="text" id="productService" name="productService" required>
+        </div>
+
+        <label>Industry (Checklist):</label>
+        <div class="form-check form-check-inline" id="industry">
+            <input type="checkbox" id="fashionApparel" name="industry" value="Fashion + Apparel">
+            <label for="fashionApparel">Fashion + Apparel</label><br>
+
+            <input class="form-check-input" type="checkbox" id="gearLifestyle" name="industry" value="Gear + Lifestyle">
+            <label for="gearLifestyle">Gear + Lifestyle</label><br>
+
+            <input class="form-check-input" type="checkbox" id="foodBeverage" name="industry" value="Food + Beverage">
+            <label for="foodBeverage">Food + Beverage</label><br>
+
+            <input class="form-check-input" type="checkbox" id="professionalServices" name="industry" value="Professional Services">
+            <label for="professionalServices">Professional Services</label><br>
+
+            <input class="form-check-input" type="checkbox" id="mediaPhotography" name="industry" value="Media + Photography">
+            <label for="mediaPhotography">Media + Photography</label><br>
+
+            <input class="form-check-input" type="checkbox" id="healthBeauty" name="industry" value="Health + Beauty">
+            <label for="healthBeauty">Health + Beauty</label><br>
+
+            <input class="form-check-input" type="checkbox" id="designHome" name="industry" value="Design + Home">
+            <label for="designHome">Design + Home</label><br>
+
+            <input class="form-check-input" type="checkbox" id="travelTransportation" name="industry" value="Travel + Transportation">
+            <label for="travelTransportation">Travel + Transportation</label><br>
+
+            <input class="form-check-input" type="checkbox" id="everydayEssentials" name="industry" value="Everyday Essentials">
+            <label for="everydayEssentials">Everyday Essentials</label><br>
+
+            <input class="form-check-input" type="checkbox" id="musicEntertainment" name="industry" value="Music + Entertainment">
+            <label for="musicEntertainment">Music + Entertainment</label><br>
+
+            <input class="form-check-input" type="checkbox" id="softwareTech" name="industry" value="Software + Tech">
+            <label for="softwareTech">Software + Tech</label><br>
+
+            <input class="form-check-input" type="checkbox" id="manufacturing" name="industry" value="Manufacturing">
+            <label for="manufacturing">Manufacturing</label><br>
+
+            <input class="form-check-input" type="checkbox" id="nonProfit" name="industry" value="Non-Profit">
+            <label for="nonProfit">Non-Profit</label><br>
+
+            <input class="form-check-input" type="checkbox" id="other" name="industry" value="Other">
+            <label for="other">Other</label><br>
+        </div>
+
+        <label>Carbon Inventory by GHG Scope (Optional Integer):</label>
+        <ul id="carbonInventory">
+            <li><label for="scope1">Scope 1 - Direct Emissions:</label><input type="number" id="scope1" name="scope1" min="0" required></li>
+            <li><label for="scope2">Scope 2 - Indirect emissions from purchased energy:</label><input type="number" id="scope2" name="scope2" min="0" required></li>
+            <li><label for="scope31">Scope 3.1 - Purchased goods + services:</label><input type="number" id="scope31" name="scope31" min="0"></li>
+            <li><label for="scope32">Scope 3.2 - Capital purchases:</label><input type="number" id="scope32" name="scope32" min="0"></li>
+            <li><label for="scope33">Scope 3.3 - Upstream energy generation + transmission:</label><input type="number" id="scope33" name="scope33" min="0"></li>
+            <li><label for="scope34">Scope 3.4 - Upstream transportation + distribution:</label><input type="number" id="scope34" name="scope34" min="0"></li>
+            <li><label for="scope35">Scope 3.5 - Waste generated in operations:</label><input type="number" id="scope35" name="scope35" min="0"></li>
+            <li><label for="scope36">Scope 3.6 - Business travel:</label><input type="number" id="scope36" name="scope36" min="0"></li>
+            <li><label for="scope37">Scope 3.7 - Employee commuting:</label><input type="number" id="scope37" name="scope37" min="0"></li>
+            <li><label for="scope39">Scope 3.9 - Downstream transportation + distribution:</label><input type="number" id="scope39" name="scope39" min="0"></li>
+        </ul>
+
+        <label for="topEmissionContributors">Top Emission Contributors (Freeform):</label>
+        <textarea id="topEmissionContributors" name="topEmissionContributors"></textarea>
+
+        <button type="submit">Submit</button>
+    </form>
+
+</body>
+</html>

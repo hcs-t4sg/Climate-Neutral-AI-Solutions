@@ -1,0 +1,24 @@
+from flask import Flask
+from flask import request
+from flask import render_template
+from flask import jsonify
+
+app = Flask(__name__)
+
+
+@app.route('/', methods=['GET', 'POST'])
+def index():
+    if request.method == 'POST':
+        # process form data here
+        form_data = request.form
+        message = "Form received. Here are the details: <br>"
+        for key, value in form_data.items():
+            if value and value != '\n':
+                message += f"{key}: {value} <br>"
+        return message
+    return render_template('index.html')
+
+if __name__ == "__main__":
+    app.run(debug=True)
+
+
